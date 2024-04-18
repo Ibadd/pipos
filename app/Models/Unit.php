@@ -18,6 +18,11 @@ class Unit extends Model
     {
         return $this->hasMany(Produk::class, 'unit_id');
     }
+    
+    public function barang()
+    {
+        return $this->hasMany(Barang::class, 'unit_id');
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

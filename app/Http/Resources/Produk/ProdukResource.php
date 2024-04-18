@@ -20,8 +20,8 @@ class ProdukResource extends JsonResource
             'kode' => $this->barcode,
             'produk' => $this->produk,
             'keterangan' => $this->keterangan,
-            'kategori' => $this->kategori->kategori,
-            'stok' => $this->stok,
+            
+           
             'stok warning' => $this->stok_warning,
             'harga' => number_format($this->harga, 0, ',', '.'),
             'harga_asli' => $this->harga,

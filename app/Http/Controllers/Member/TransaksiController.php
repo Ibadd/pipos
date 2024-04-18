@@ -26,6 +26,9 @@ class TransaksiController extends Controller
     public function index()
     {
         return view('member.transaksi.index');
+        // $transaksis = Transaksi::all();
+        // dd($transaksis);
+        
     }
 
     public function ajax(Request $request)
@@ -42,6 +45,7 @@ class TransaksiController extends Controller
             ->where(function ($e) use ($tanggal) {
                 $e->whereDate('created_at', '>=', $tanggal[0])->whereDate('created_at', '<=', $tanggal[1]);
             });
+            
 
         if ($request->filled('export')) {
 
@@ -61,6 +65,7 @@ class TransaksiController extends Controller
             ->rawColumns(['transaksi'])
             ->make(true);
     }
+    
 
     public function show($uuid)
     {

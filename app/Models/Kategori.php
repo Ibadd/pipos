@@ -14,9 +14,9 @@ class Kategori extends Model
 
     protected $guarded = [];
 
-    public function produk()
+    public function barang()
     {
-        return $this->hasMany(Produk::class, 'kategori_id');
+        return $this->hasMany(Barang::class, 'kategori_id');
     }
 
     public function getActivitylogOptions(): LogOptions

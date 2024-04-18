@@ -16,7 +16,7 @@ class Stok extends Model
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class, 'produk_id');
+        return $this->belongsTo(Barang::class, 'barang_id');
     }
 
     public function suplier()

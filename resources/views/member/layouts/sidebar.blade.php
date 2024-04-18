@@ -22,8 +22,11 @@
             </a>
         </li>
 
-        @can('KASIR_READ')
+        @canany(['KASIR_READ', 'PESANAN_READ'])
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Aktivitas</span></li>
+        @endcanany
+
+        @can('KASIR_READ')
             <li class="menu-item {{ menuAktif('kasir') }}">
                 <a href="{{ route('kasir.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-money-withdraw"></i>
@@ -32,24 +35,25 @@
             </li>
         @endcan
 
+        @can('PESANAN_READ')
+            <li class="menu-item {{ menuAktif('kasir') }}">
+                <a href="{{ route('pesanan.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-money-withdraw"></i>
+                    <div data-i18n="Analytics">Pesanan </div>
+                </a>
+            </li>
+        @endcan
+
         @canany(['PRODUK_READ', 'KATEGORI_READ', 'SUPLIER_READ', 'UNIT_READ'])
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Produk</span></li>
         @endcanany
 
+       
         @can('PRODUK_READ')
             <li class="menu-item {{ menuAktif('produk') }}">
                 <a href="{{ route('produk.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-data"></i>
                     <div data-i18n="Analytics">Produk</div>
-                </a>
-            </li>
-        @endcan
-
-        @can('KATEGORI_READ')
-            <li class="menu-item {{ menuAktif('kategori') }}">
-                <a href="{{ route('kategori.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-category-alt"></i>
-                    <div data-i18n="Analytics">Kategori</div>
                 </a>
             </li>
         @endcan
@@ -73,7 +77,7 @@
         @endcan
 
 
-        @canany(['TRANSAKSI_READ', 'STOKIN_READ', 'STOKOUT_READ'])
+        @canany(['TRANSAKSI_READ','PEMESANAN_READ', 'STOKIN_READ', 'STOKOUT_READ'])
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
         @endcanany
 
@@ -86,6 +90,25 @@
             </li>
         @endcan
 
+        @can('PEMESANAN_READ')
+            <li class="menu-item {{ menuAktif('pemesanan') }}">
+                <a href="{{ route('pemesanan.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-math"></i>
+                    <div data-i18n="Analytics">Pemesanan</div>
+                </a>
+            </li>
+        @endcan
+
+       
+
+        @can('PRODUK_READ')
+            <li class="menu-item {{ menuAktif('barang') }}">
+                <a href="{{ route('barang.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-data"></i>
+                    <div data-i18n="Analytics">Merk</div>
+                </a>
+            </li>
+        @endcan
 
         @can('STOKIN_READ')
             <li class="menu-item {{ menuAktif('stokin') }}">
@@ -101,6 +124,15 @@
                 <a href="{{ route('stokout.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-link-external"></i>
                     <div data-i18n="Analytics">Stok Keluar</div>
+                </a>
+            </li>
+        @endcan
+
+        @can('KATEGORI_READ')
+            <li class="menu-item {{ menuAktif('kategori') }}">
+                <a href="{{ route('kategori.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-category-alt"></i>
+                    <div data-i18n="Analytics">Jenis Barang</div>
                 </a>
             </li>
         @endcan

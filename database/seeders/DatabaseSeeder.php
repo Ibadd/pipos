@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             MemberSeeder::class,
-            KategoriSeeder::class,
+            //KategoriSeeder::class,
             SuplierSeeder::class,
             UnitSeeder::class,
-            ProdukSeeder::class,
+            //ProdukSeeder::class,
             // StokSeeder::class,
         ]);
     }

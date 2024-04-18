@@ -32,11 +32,11 @@ class ProdukController extends Controller
     public function ajax(Request $request)
     {
         $cari = $request->cari;
-        $kategori = $request->kategori;
+        
 
         $data = Produk::query()
-            ->withWhereHas('kategori')
-            ->when($kategori, fn ($e, $kategori) => $e->whereHas('kategori', fn ($e) => $e->whereIn('id', $kategori)))
+            
+            
             ->when($cari, function ($e, $cari) {
                 $e->where(function ($e) use ($cari) {
                     $e->where('barcode', 'like', '%' . $cari . '%')->orWhere('produk', 'like', '%' . $cari . '%')->orWhere('keterangan', 'like', '%' . $cari . '%');
@@ -55,7 +55,7 @@ class ProdukController extends Controller
         }
 
         return DataTables::eloquent($data)
-            ->editColumn('kategori_id', fn ($e) => $e->kategori->kategori)
+            
             ->addColumn('unit', fn ($e) => $e->unit->unit)
             ->editColumn('foto', fn ($e) => fotoProduk($e->foto))
             ->editColumn('status', fn ($e) => statusTable($e->status))
@@ -97,6 +97,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        // $produk = Produk::all();
+        // dd($produk);
         return view('member.produk.index');
     }
 
@@ -115,12 +117,15 @@ class ProdukController extends Controller
     {
         DB::beginTransaction();
         try {
-            Produk::create($request->only(['kategori_id', 'barcode', 'produk', 'keterangan', 'harga', 'stok_warning', 'foto', 'unit_id', 'is_app']));
+            $produk = Produk::create($request->only(['barcode', 'produk', 'keterangan', 'harga', 'stok_warning', 'foto', 'unit_id', 'is_app'])+ ['stok' => 99]);
+            
+            
             DB::commit();
 
             return redirect()->back()->with('pesan', '<div class="alert alert-success">Data berhasil ditambahkan</div>');
         } catch (\Throwable $th) {
             DB::rollBack();
+            
             Log::warning($th->getMessage());
             return redirect()->back()->with('pesan', '<div class="alert alert-danger">Terjadi kesalahan, cobalah kembali</div>');
         }
@@ -162,7 +167,7 @@ class ProdukController extends Controller
     {
         DB::beginTransaction();
         try {
-            Produk::find($produk->id)->update($request->only(['kategori_id', 'barcode', 'produk', 'keterangan', 'harga', 'stok_warning', 'foto', 'unit_id', 'is_app']));
+            Produk::find($produk->id)->update($request->only(['barcode', 'produk', 'keterangan', 'harga', 'stok_warning', 'foto', 'unit_id', 'is_app']));
             DB::commit();
 
             return redirect()->back()->with('pesan', '<div class="alert alert-success">Data berhasil diperbaruhi</div>');
@@ -182,14 +187,15 @@ class ProdukController extends Controller
         DB::beginTransaction();
         try {
             $produk = Produk::where('uuid', $produk)->firstOrFail();
-            $status = $produk->status;
+            $produk->delete();
+            // $status = $produk->status;
 
-            if ($status == true) {
-                Produk::find($produk->id)->update(['status' => false]);
-            } else {
-                Produk::find($produk->id)->update(['status' => true]);
-            }
-
+            // if ($status == true) {
+            //     Produk::find($produk->id)->update(['status' => false]);
+            // } else {
+            //     Produk::find($produk->id)->update(['status' => true]);
+            // }
+            
             DB::commit();
 
             return response()->json([

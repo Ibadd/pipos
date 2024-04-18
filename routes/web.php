@@ -3,6 +3,7 @@
 use App\Http\Controllers\Member\AjaxController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Member\KasirController;
+use App\Http\Controllers\Member\PemesananController;
 use App\Http\Controllers\Member\BannerController;
 use App\Http\Controllers\Member\HomeController;
 use App\Http\Controllers\Member\KategoriController;
@@ -19,6 +20,8 @@ use App\Http\Controllers\Member\UserController;
 use App\Http\Controllers\Member\StokInController;
 use App\Http\Controllers\Member\StokOutController;
 use App\Http\Controllers\Member\TransaksiController;
+use App\Http\Controllers\Member\PesananController;
+use App\Http\Controllers\Member\BarangController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,7 +46,15 @@ Route::middleware('xss')->group(function () {
         Route::post('/kasir/bayar', [KasirController::class, 'bayar'])->name('kasir.bayar');
         Route::post('/kasir/transaksi', [TransaksiController::class, 'ajax'])->name('kasir.transaksi');
         Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-        Route::get('/transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaaksi.show');
+        Route::get('/transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
+
+        Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
+        Route::post('/pesanan/bayar', [PesananController::class, 'bayar'])->name('pesanan.bayar');
+        Route::post('/pesanan/pemesanan', [PemesananController::class, 'ajax'])->name('pesanan.pemesanan');
+        Route::get('/pemesanan', [PemesananController::class, 'index'])->name('pemesanan.index');
+        Route::get('/pemesanan/{pemesanan}', [PemesananController::class, 'show'])->name('pemesanan.show');
+
+
 
         Route::resource('kategori', KategoriController::class);
         Route::post('/kategori-ajax', [KategoriController::class, 'ajax'])->name('kategori.ajax');
@@ -52,6 +63,11 @@ Route::middleware('xss')->group(function () {
         Route::post('/produk-ajax', [ProdukController::class, 'ajax'])->name('produk.ajax');
         Route::get('/produk/id/{id}', [ProdukController::class, 'showById']);
         Route::post('/produk/cariproduk', [ProdukController::class, 'cariProduk']);
+
+        Route::resource('barang', BarangController::class);
+        Route::post('/barang-ajax', [BarangController::class, 'ajax'])->name('barang.ajax');
+        Route::get('/barang/id/{id}', [BarangController::class, 'showById']);
+        Route::post('/barang/caribarang', [BarangController::class, 'cariBarang']);
 
         Route::resource('suplier', SuplierController::class);
         Route::post('/suplier-ajax', [SuplierController::class, 'ajax'])->name('suplier.ajax');
@@ -101,7 +117,9 @@ Route::middleware('xss')->group(function () {
             Route::post('/kategori', [AjaxController::class, 'kategori'])->name('drop-kategori');
             Route::post('/unit', [AjaxController::class, 'unit'])->name('drop-unit');
             Route::post('/produk', [AjaxController::class, 'produk'])->name('drop-produk');
+            Route::post('/barang', [AjaxController::class, 'barang'])->name('drop-barang');
             Route::post('/suplier', [AjaxController::class, 'suplier'])->name('drop-suplier');
+            Route::get('/drop-nama-barang', [AjaxController::class, 'dropNamaBarang'])->name('drop-nama-barang');
         });
     });
 });

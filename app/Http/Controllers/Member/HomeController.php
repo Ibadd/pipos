@@ -27,15 +27,33 @@ class HomeController extends Controller
 
         try {
             // total
+            // $total = DB::table('transaksis as a')
+            //     ->where(fn ($e) => $e->whereDate('a.created_at', '>=', $tanggal[0])->whereDate('a.created_at', '<=', $tanggal[1]))
+            //     ->count();
             $total = DB::table('transaksis as a')
-                ->where(fn ($e) => $e->whereDate('a.created_at', '>=', $tanggal[0])->whereDate('a.created_at', '<=', $tanggal[1]))
-                ->count();
+            ->where(fn ($e) => $e->whereDate('a.created_at', '>=', $tanggal[0])->whereDate('a.created_at', '<=', $tanggal[1]))
+            ->unionAll(
+                DB::table('pemesanans as b')
+                    ->where(fn ($e) => $e->whereDate('b.created_at', '>=', $tanggal[0])->whereDate('b.created_at', '<=', $tanggal[1]))
+            )
+            ->count();
+                
 
             // total items
+            // $items = DB::table('transaksis as a')
+            //     ->select('items')
+            //     ->where(fn ($e) => $e->whereDate('a.created_at', '>=', $tanggal[0])->whereDate('a.created_at', '<=', $tanggal[1]))
+            //     ->get()->pluck('items');
             $items = DB::table('transaksis as a')
-                ->select('items')
-                ->where(fn ($e) => $e->whereDate('a.created_at', '>=', $tanggal[0])->whereDate('a.created_at', '<=', $tanggal[1]))
-                ->get()->pluck('items');
+            ->select('items')
+            ->where(fn ($e) => $e->whereDate('a.created_at', '>=', $tanggal[0])->whereDate('a.created_at', '<=', $tanggal[1]))
+            ->unionAll(
+                DB::table('pemesanans as b')
+                    ->select('items')
+                    ->where(fn ($e) => $e->whereDate('b.created_at', '>=', $tanggal[0])->whereDate('b.created_at', '<=', $tanggal[1]))
+            )
+            ->get()->pluck('items');
+
 
             $dataItems = [];
             foreach ($items as $item) {

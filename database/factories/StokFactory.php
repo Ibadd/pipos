@@ -19,7 +19,7 @@ class StokFactory extends Factory
         return [
             'tipe' => fake()->numberBetween(1,3),
             'suplier_id' => fake()->numberBetween(1, 7),
-            'produk_id' => fake()->numberBetween(1, 25),
+            'barang_id' => fake()->numberBetween(1, 25),
             'qty' => fake()->numberBetween(7, 89),
             'keterangan' => fake()->sentence(7),
         ];

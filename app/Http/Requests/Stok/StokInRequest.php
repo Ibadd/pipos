@@ -23,7 +23,7 @@ class StokInRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'produk_id' => ['required'],
+            'barang_id' => ['required'],
             'qty' => ['required', 'numeric', 'min:1'],
             'suplier_id' => ['nullable'],
             'keterangan' => ['required_if:suplier_id,null']
@@ -41,7 +41,7 @@ class StokInRequest extends FormRequest
     {
         return [
             'suplier_id' => 'Suplier',
-            'produk_id' => 'Produk'
+            'barang_id' => 'Produk'
         ];
     }
 

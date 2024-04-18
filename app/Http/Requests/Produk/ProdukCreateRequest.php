@@ -23,7 +23,7 @@ class ProdukCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kategori_id' => ['required'],
+            
             'barcode' => ['required', Rule::unique('produks', 'barcode'), 'min:3'],
             'produk' => ['required'],
             'keterangan' => ['nullable'],
@@ -59,7 +59,7 @@ class ProdukCreateRequest extends FormRequest
         return [
             'barcode' => 'Kode',
             'unit_id' => 'Unit',
-            'kategori_id' => 'Kategori'
+            
         ];
     }
 }

@@ -27,8 +27,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">produk <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <select name="produk_id" id="produk_id" class="form-control produk-select"
-                                        data-ajax--url="{{ route('drop-produk') }}"></select>
+                                    <select name="barang_id" id="barang_id" class="form-control produk-select"
+                                        data-ajax--url="{{ route('drop-barang') }}"></select>
                                 </div>
                             </div>
 

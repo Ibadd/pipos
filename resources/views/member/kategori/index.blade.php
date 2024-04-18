@@ -36,8 +36,6 @@
                     <tr>
                         <th>kode</th>
                         <th>kategori</th>
-                        <th>item</th>
-                        <th>sku stok</th>
                         <th>status</th>
                         <th></th>
                     </tr>
@@ -80,12 +78,6 @@
                     data: 'kategori'
                 },
                 {
-                    data: 'produk_count'
-                },
-                {
-                    data: 'total_stok'
-                },
-                {
                     data: 'status'
                 },
                 {
@@ -118,16 +110,7 @@
                             <td>:</td>
                             <td>${data.kategori}</td>
                         </tr>
-                        <tr>
-                            <td class="col-form-label">items</td>
-                            <td>:</td>
-                            <td>${data.produk_count}</td>
-                        </tr>
-                        <tr>
-                            <td class="col-form-label">sku stok</td>
-                            <td>:</td>
-                            <td>${data.total_stok}</td>
-                        </tr>
+                       
                     </tbody>
                 </table>
             `;

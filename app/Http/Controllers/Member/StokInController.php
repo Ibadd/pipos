@@ -63,7 +63,7 @@ class StokInController extends Controller
                 ->useLog('stok in export')
                 ->log(request()->ip());
 
-            return Excel::download(new StokInExport($data->get()), 'stokin.xlsx');
+            return Excel::download(new StokInExport($data->get()), 'stokin.pdf');
         }
 
         return DataTables::eloquent($data)
@@ -89,10 +89,10 @@ class StokInController extends Controller
     {
         DB::beginTransaction();
         try {
-            $stok = Stok::create($request->only(['tipe', 'suplier_id', 'produk_id', 'qty', 'keterangan']));
-
+            $stok = Stok::create($request->only(['tipe', 'suplier_id', 'barang_id', 'qty', 'keterangan']));
+            
             StokEvent::dispatch($stok);
-
+            
             DB::commit();
 
             return redirect()->back()->with('pesan', '<div class="alert alert-success">Data berhasil ditambahkan</div>');

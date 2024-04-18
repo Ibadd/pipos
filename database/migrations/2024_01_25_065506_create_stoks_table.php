@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid();
             $table->unsignedTinyInteger('tipe')->nullable();
             $table->foreignId('suplier_id')->nullable()->constrained('supliers')->onDelete('cascade');
-            $table->foreignId('produk_id')->constrained('produks')->onDelete('cascade');
+            $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
             $table->unsignedInteger('qty')->default(0);
             $table->char('reason')->nullable()->index();
             $table->string('keterangan')->nullable();

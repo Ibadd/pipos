@@ -6,10 +6,10 @@
                 document.write(new Date().getFullYear());
             </script>
             |
-            <a href="https://pitagoras.cloud" target="_blank" class="footer-link fw-bolder">Pitagoras</a> - Version
+            <a target="_blank" class="footer-link fw-bolder">Kasir</a> - Version
             {{ env('APP_VERSION') }}
         </div>
 
-        <a href="https://wa.me/6285171737359" target="_blank" class="btn btn-sm btn-outline-success"><i class='bx bxl-whatsapp float-start'></i> Developer</a>
+       
     </div>
 </footer>

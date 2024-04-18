@@ -31,17 +31,17 @@ class KasirController extends Controller
             Transaksi::create($request->only(['total', 'bayar', 'kembali', 'items', 'member_id', 'member_detail']));
 
             // insert to history stok
-            foreach ($request->items as $item) {
-                $produk_id = Produk::query()->where('uuid', $item['id'])->first()->id;
+            // foreach ($request->items as $item) {
+            //     $produk_id = Produk::query()->where('uuid', $item['id'])->first()->id;
 
-                $stok = Stok::create([
-                    'tipe' => 3,
-                    'produk_id' => $produk_id,
-                    'qty' => $item['qty'],
-                ]);
+            //     $stok = Stok::create([
+            //         'tipe' => 3,
+            //         'produk_id' => $produk_id,
+            //         'qty' => $item['qty'],
+            //     ]);
 
-                StokEvent::dispatch($stok);
-            }
+            //     // StokEvent::dispatch($stok);
+            // }
 
             DB::commit();
 

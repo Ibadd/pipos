@@ -9,10 +9,7 @@
             </h5>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-3 col-6 mt-2">
-                        <select name="kategori" id="kategori" class="form-control kategori-select" multiple
-                            onchange="datatables.ajax.reload()" data-ajax--url="{{ route('drop-kategori') }}"></select>
-                    </div>
+                    
                     <div class="col-sm-4 col-6 mt-2"><input type="text" id="cari" class="form-control"
                             placeholder="Cari...">
                     </div>
@@ -37,7 +34,7 @@
                     <tr>
                         <th>foto</th>
                         <th>produk</th>
-                        <th>kategori</th>
+                        
                         <th>stok</th>
                         <th>harga</th>
                         <th>status</th>
@@ -77,7 +74,7 @@
                 type: "POST",
                 data: function(d) {
                     d._token = $("input[name=_token]").val();
-                    d.kategori = $("#kategori").val();
+                    // d.kategori = $("#kategori").val();
                     d.status = $('.btn-check:checked').val();
                     d.cari = $('#cari').val();
                 },
@@ -93,9 +90,9 @@
                                 <div>${barcode}</div>`;
                     }
                 },
-                {
-                    data: 'kategori_id'
-                },
+                // {
+                //     data: 'kategori_id'
+                // },
                 {
                     data: 'stok',
                 },

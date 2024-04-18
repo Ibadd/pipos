@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
+           
             $table->string('barcode')->index()->unique()->nullable();
             $table->string('produk');
             $table->text('keterangan')->nullable();

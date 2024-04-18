@@ -17,11 +17,11 @@ class ProdukFactory extends Factory
     public function definition(): array
     {
         return [
-            'kategori_id' => fake()->numberBetween(1, 7),
+            
             'barcode' => fake()->ean13(),
             'produk' => fake()->sentence(3),
             'keterangan' => fake()->sentence(7),
-            'stok' => 0,
+            'stok' => 99,
             'harga' => fake()->numberBetween(12000, 300000),
             'stok_warning' => fake()->numberBetween(0, 5),
             'unit_id' => fake()->numberBetween(1, 2),

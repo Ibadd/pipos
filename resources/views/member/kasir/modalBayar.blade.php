@@ -19,7 +19,21 @@
                             <input type="hidden" id="totalAllModalValue">
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Total Setelah Diskon</label>
+                        <div class="col-sm-9">
+                            <h4 id="setelahdiskon"></h4>
+                            <input type="hidden" id="setelahdiskonValue">
+                        </div>
+                    </div>
 
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">diskon</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="modal_diskon_input">
+                        </div>
+                    </div>
+                    
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Tunai</label>
                         <div class="col-sm-9">

@@ -23,7 +23,7 @@ class StokOutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'produk_id' => ['required'],
+            'barang_id' => ['required'],
             'qty' => ['required', 'numeric', 'min:1'],
             'reason' => ['nullable'],
             'keterangan' => ['required_if:reason,Lainnya']
@@ -40,7 +40,7 @@ class StokOutRequest extends FormRequest
     public function attributes()
     {
         return [
-            'produk_id' => 'Produk',
+            'barang_id' => 'Produk',
             'reason' => 'Alasan'
         ];
     }

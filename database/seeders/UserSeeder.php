@@ -27,23 +27,33 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'nama' => 'ADMIN',
             'uuid' => Str::uuid(),
-            'email' => 'admin@pitagoras.cloud',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'whatsapp' => '085171737359',
-            'alamat' => 'Sidoarjo'
+            'alamat' => 'Malang'
         ]);
 
         $kasir = User::create([
             'nama' => 'KASIR',
             'uuid' => Str::uuid(),
-            'email' => 'kasir@pitagoras.cloud',
+            'email' => 'kasir@gmail.com',
             'password' => Hash::make('password'),
             'whatsapp' => '085171737359',
-            'alamat' => 'Sidoarjo'
+            'alamat' => 'Malang'
+        ]);
+
+        $gudang = User::create([
+            'nama' => 'GUDANG',
+            'uuid' => Str::uuid(),
+            'email' => 'gudang@gmail.com',
+            'password' => Hash::make('password'),
+            'whatsapp' => '085171737359',
+            'alamat' => 'Malang'
         ]);
 
         $superadmin->syncRoles('superadmin');
         $admin->syncRoles('admin');
         $kasir->syncRoles('kasir');
+        $gudang->syncRoles('gudang');
     }
 }

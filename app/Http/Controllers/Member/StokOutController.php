@@ -93,7 +93,7 @@ class StokOutController extends Controller
     {
         DB::beginTransaction();
         try {
-            $stok = Stok::create($request->only(['tipe', 'reason', 'produk_id', 'qty', 'keterangan']));
+            $stok = Stok::create($request->only(['tipe', 'reason', 'barang_id', 'qty', 'keterangan']));
 
             StokEvent::dispatch($stok);
 

@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\StokEvent;
-use App\Models\Produk;
+use App\Models\Barang;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -24,14 +24,14 @@ class UpdateStokProdukListener
     public function handle(StokEvent $event): void
     {
         $tipe = $event->stok->tipe;
-        $produk_id = $event->stok->produk_id;
+        $produk_id = $event->stok->barang_id;
         $currentStok = $event->stok->produk->stok;
         $newStok = $event->stok->qty;
 
         switch ($tipe) {
                 // stok masukkk
             case 1:
-                Produk::find($produk_id)->update([
+                Barang::find($produk_id)->update([
                     'stok' => $currentStok + $newStok
                 ]);
                 break;
@@ -45,7 +45,7 @@ class UpdateStokProdukListener
                     break;
                 }
 
-                Produk::find($produk_id)->update([
+                Barang::find($produk_id)->update([
                     'stok' => $currentStok - $newStok
                 ]);
                 break;

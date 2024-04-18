@@ -41,10 +41,6 @@ class KategoriController extends Controller
         $cari = $request->cari;
 
         $data = Kategori::query()
-            ->withCount([
-                'produk',
-                'produk as total_stok' => fn($e) => $e->select(DB::raw('coalesce(sum(stok), 0)')),
-            ])
             ->when($cari, function ($e, $cari) {
                 $e->where('kategori', 'like', '%' . $cari . '%')->orWhere('kode', 'like', '%' . $cari . '%');
             })

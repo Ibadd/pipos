@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Kecamatan;
 use App\Models\Kota;
 use App\Models\Produk;
+use App\Models\Barang;
 use App\Models\Provinsi;
 use App\Models\Suplier;
 use App\Models\Unit;
@@ -168,6 +169,30 @@ class AjaxController extends Controller
         }
     }
 
+    public function barang(Request $request)
+    {
+        $term = $request->term;
+
+        $data = Barang::query()
+            ->when($term, function ($e, $term) {
+                $e->where('barcode', 'like', '%' . $term . '%')->orWhere('produk', 'like', '%' . $term . '%');
+            })
+            ->where('status', true)
+            ->select('id', DB::raw('CONCAT(barcode, " - ", produk) as label'));
+
+        if ($data->count() > 0) {
+            return response()->json([
+                'data'  => $data->get(),
+                'status' => true
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'data'  => null,
+            ]);
+        }
+    }
+
     public function suplier(Request $request)
     {
         $term = $request->term;
@@ -190,6 +215,13 @@ class AjaxController extends Controller
                 'data'  => null,
             ]);
         }
+    }
+
+    public function dropNamaBarang(Request $request)
+    {
+        $nama_barang = NamaBarang::all();
+
+        return response()->json($nama_barang);
     }
 
     public function ganti_foto(Request $request)

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::table('produks', function (Blueprint $table) {
             $table->foreignId('unit_id')->after('foto')->constrained('units')->onDelete('cascade');
         });
+        Schema::table('barangs', function (Blueprint $table) {
+            $table->foreignId('unit_id')->after('foto')->constrained('units')->onDelete('cascade');
+        });
     }
 
     /**
@@ -22,6 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('produks', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('unit_id');
+        });
+        Schema::table('barangs', function (Blueprint $table) {
             $table->dropConstrainedForeignId('unit_id');
         });
     }

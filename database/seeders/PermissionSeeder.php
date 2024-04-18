@@ -50,6 +50,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'PRODUK_DELETE']);
         Permission::create(['name' => 'PRODUK_PRINT']);
 
+        Permission::create(['name' => 'BARANG_READ']);
+        Permission::create(['name' => 'BARANG_CREATE']);
+        Permission::create(['name' => 'BARANG_EDIT']);
+        Permission::create(['name' => 'BARANG_DELETE']);
+        Permission::create(['name' => 'BARANG_PRINT']);
+
         Permission::create(['name' => 'SUPLIER_READ']);
         Permission::create(['name' => 'SUPLIER_CREATE']);
         Permission::create(['name' => 'SUPLIER_EDIT']);
@@ -74,10 +80,15 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'TRANSAKSI_READ']);
         Permission::create(['name' => 'TRANSAKSI_PRINT']);
 
+        Permission::create(['name' => 'PEMESANAN_READ']);
+        Permission::create(['name' => 'PESANAN_READ']);
+        
+
 
         $superadmin = Role::where('name', 'superadmin')->first();
         $admin = Role::where('name', 'admin')->first();
         $kasir = Role::where('name', 'kasir')->first();
+        $gudang = Role::where('name', 'gudang')->first();
 
         $permissions = Permission::all();
 
@@ -101,6 +112,11 @@ class PermissionSeeder extends Seeder
             'PRODUK_EDIT',
             'PRODUK_DELETE',
             'PRODUK_PRINT',
+            'BARANG_READ',
+            'BARANG_CREATE',
+            'BARANG_EDIT',
+            'BARANG_DELETE',
+            'BARANG_PRINT',
             'SUPLIER_READ',
             'SUPLIER_CREATE',
             'SUPLIER_EDIT',
@@ -125,11 +141,24 @@ class PermissionSeeder extends Seeder
             'USERWEB_CREATE',
             'USERWEB_EDIT',
             'USERWEB_DELETE',
+            'PESANAN_READ',
+            'PEMESANAN_READ',
         ]);
 
         // Role Kasir
         $kasir->syncPermissions([
             'KASIR_READ',
+            'PESANAN_READ',
+        ]);
+        
+        //Role Gudang
+        $gudang->syncPermissions([
+            'STOKIN_READ',
+            'STOKIN_CREATE',
+            'STOKIN_PRINT',
+            'STOKOUT_READ',
+            'STOKOUT_CREATE',
+            'STOKOUT_PRINT',
         ]);
     }
 }

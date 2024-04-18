@@ -97,7 +97,7 @@
 
                 const id = data.uuid;
                 const produk = data.produk;
-                const kategori = data.kategori;
+                
                 const harga = data.harga_asli;
                 const subtotal = harga * qty;
                 const currentStok = data.stok;
@@ -140,7 +140,7 @@
                     const newItems = {
                         'nomor': nomor,
                         'id': id,
-                        'kategori': kategori,
+                        
                         'produk': produk,
                         'harga': harga,
                         'qty': qty,
@@ -223,9 +223,12 @@
         $('.totalAll').text(0);
         $('.totalAllModal').text(0);
         $('#totalAllModalValue').val(0);
+        $('.setelahdiskon').text(0);
+        $('#setelahdiskonValue').val(0);
         $('#modalBayarKembaliValue').val(0);
         $('#modalBayarKembali').text(0);
         $('#modal_bayar_input').simpleMoneyFormat();
+        $('#modal_diskon_input').simpleMoneyFormat();
         $('#btn-bayar').attr('disabled', 'disabled');
 
         // pilihan member atau umum
@@ -352,18 +355,24 @@
 
         // ========= Bayar
         $("#modalBayar").on('shown.bs.modal', function() {
+            $(this).find('#modal_diskon_input').val('').focus();
             $(this).find('#modal_bayar_input').val('').focus();
 
             $('#modal_bayar_input').keyup(function() {
-                const total = $('#totalAllModalValue').val();
                 const bayar = $(this).val();
+                const total = $('#totalAllModalValue').val();
+                const diskon = $('#modal_diskon_input').val();
+                const diskonhitung  =  Number(total) * Number(diskon) / 100;
+                const diskonhasil = Number(total) - Number(diskonhitung);
+                
                 const kembali = Number(formatAngkaTanpaNol(bayar)) - Number(total) < 0 ?
                     0 :
-                    Number(formatAngkaTanpaNol(bayar)) - Number(total);
-
+                    Number(formatAngkaTanpaNol(bayar)) - Number(diskonhasil);
+                
                 $('#modalBayarKembaliValue').val(kembali);
                 $('#modalBayarKembali').text(formatRupiah(kembali));
-
+                $('#setelahdiskonValue').val(diskonhasil);
+                $('#setelahdiskon').text(formatRupiah(diskonhasil));
             });
         });
 
@@ -577,12 +586,8 @@
             columns: [{
                     data: 'produk'
                 },
-                {
-                    data: 'kategori_id'
-                },
-                {
-                    data: 'stok',
-                },
+               
+                
                 {
                     data: 'harga',
                     render: function(data) {
