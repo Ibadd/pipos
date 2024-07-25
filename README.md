@@ -41,11 +41,11 @@ Create dummy data
 php artisan migrate --seed
 ```
 
-Change from the fork
--Add Multiple Store
--Add Pemesanan/PreOrder
--Add Jenis Barang
--Add Activity History (for admin to see who is logging in and what are their roles)
+### Change from the fork
+- Add Multiple Store
+- Add Pemesanan/PreOrder
+- Add Jenis Barang
+- Add Activity History (for admin to see who is logging in and what are their roles)
 
 
 
